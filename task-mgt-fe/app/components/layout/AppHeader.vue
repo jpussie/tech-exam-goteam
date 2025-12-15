@@ -48,6 +48,14 @@
           <img src="https://i.pravatar.cc/100" class="w-full h-full object-cover" /> 
         </button> 
         <div v-if="open" class="absolute right-0 mt-2 w-44 rounded-xl border bg-white shadow-lg z-50" > 
+          <div class="px-4 py-3 border-b">
+            <p class="text-sm font-medium text-gray-900 truncate">
+              {{ auth.user?.name }}
+            </p>
+            <p class="text-xs text-gray-500 truncate">
+              {{ auth.user?.email }}
+            </p>
+          </div>
           <button class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100" 
             @click="logout" > 
             Logout 
@@ -59,7 +67,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import { LogInIcon, Search } from 'lucide-vue-next'
+import { Search } from 'lucide-vue-next'
 import type { Task } from '~/types/task'
 import { useDebounceFn } from '@vueuse/core'
 
