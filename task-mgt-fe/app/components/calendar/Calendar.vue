@@ -127,7 +127,6 @@ const weekBeforeLastDays = computed(() => {
 const selectDate = (date: Date) => {
   selectedDate.value = date
   dateStore.setSelectedDate(date)
-  console.log(selectedDate.value);
 }
 
 watch(

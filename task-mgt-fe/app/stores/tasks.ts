@@ -19,7 +19,6 @@ export const useTaskStore = defineStore('tasks', {
     async fetchTasks(dueDate?: string) {
       const auth = useAuthStore()
       const config = useRuntimeConfig()
-      console.log(auth.token);
       
       var res = await $fetch(`${config.public.apiBase}/tasks`, {
         headers: {
@@ -27,7 +26,6 @@ export const useTaskStore = defineStore('tasks', {
         },
         query: dueDate ? { due_date: dueDate } : {},
       })
-      console.log('response ni', res);
       
       this.setTasks(res?.data as Task[]);
     },
