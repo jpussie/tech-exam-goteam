@@ -35,7 +35,7 @@
 
           <button
             class="text-gray-400 hover:text-gray-600"
-            @click="removeTask(task.id)"
+            @click="confirmRemove(task.id)"
           >
             <Trash2 />
           </button>
@@ -59,6 +59,33 @@
           />
           {{ task.description }}
         </label>
+      </div>
+    </div>
+
+    <div
+      v-if="showConfirm"
+      class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
+      <div class="bg-white rounded-xl p-6 w-80">
+        <p class="text-sm text-gray-700 mb-4">
+          Delete this task?
+        </p>
+
+        <div class="flex justify-end gap-2">
+          <button
+            class="px-3 py-1 text-sm rounded hover:bg-gray-100"
+            @click="showConfirm = false"
+          >
+            Cancel
+          </button>
+
+          <button
+            class="px-3 py-1 text-sm rounded bg-red-600 text-white hover:bg-red-700"
+            @click="deleteConfirmed"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
 
@@ -152,6 +179,23 @@ const submit = async () => {
 
   taskDescription.value = ''
   editingTaskId.value = null
+}
+
+
+const showConfirm = ref(false)
+const taskToDelete = ref<number | null>(null)
+
+const confirmRemove = (id: number) => {
+  taskToDelete.value = id
+  showConfirm.value = true
+}
+
+const deleteConfirmed = () => {
+  if (taskToDelete.value !== null) {
+    removeTask(taskToDelete.value)
+  }
+  showConfirm.value = false
+  taskToDelete.value = null
 }
 
 const removeTask = (id: number) => {
