@@ -76,8 +76,9 @@ async function handleLogin() {
     await auth.login({ email: email.value, password: password.value });
     // after login redirect
     router.push('/dashboard');
-  } catch (e) {
-    // error already set in store
+  } catch (error) {
+    console.error('Login failed:', error);
+    alert('Login failed. Please check your credentials and try again.');
   }
 }
 </script>
