@@ -33,9 +33,7 @@
           <div>
             <div class="flex items-center justify-between">
               <label class="text-sm text-gray-600">Password</label>
-              <NuxtLink to="/forgot-password" class="text-xs text-gray-500 hover:underline">
-                Forgot your password?
-              </NuxtLink>
+              <a href="" class="text-sm text-gray-600 hover:underline">Forgot your password?</a>
             </div>
 
             <input 
@@ -61,7 +59,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import { LogInIcon } from 'lucide-vue-next'
 import { useAuthStore } from '~/stores/useAuthStore'
 import { useRouter } from 'vue-router'
 
@@ -76,9 +73,8 @@ async function handleLogin() {
     await auth.login({ email: email.value, password: password.value });
     // after login redirect
     router.push('/dashboard');
-  } catch (error) {
-    console.error('Login failed:', error);
-    alert('Login failed. Please check your credentials and try again.');
+  } catch (e) {
+    // error already set in store
   }
 }
 </script>
